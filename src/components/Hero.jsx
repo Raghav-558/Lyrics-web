@@ -28,7 +28,7 @@ const Hero = () => {
               customOnClick={() => handleDomainChange('soft')}
               myClass={`${
                 activeParams.get('value') === 'soft'
-                  ? 'bg-black text-white'
+                  ? 'bg-custom-black text-white'
                   : ''
               } !text-xs px-[13.48px] py-[5.84px]`}
               buttonText='All'
@@ -36,17 +36,17 @@ const Hero = () => {
             <CustomButton
               customOnClick={() => handleDomainChange('pop')}
               myClass={`${
-                activeParams.get('value') === 'pop' ? 'bg-black text-white' : ''
-              } !text-xs text-customBlack py-[5.84px] px-[11.37px]`}
+                activeParams.get('value') === 'pop' ? 'bg-custom-black text-white' : ''
+              } !text-xs text-custom-black py-[5.84px] px-[11.37px]`}
               buttonText='Pop'
             />
             <CustomButton
               customOnClick={() => handleDomainChange('rock')}
               myClass={`${
                 activeParams.get('value') === 'rock'
-                  ? 'bg-black text-white'
+                  ? 'bg-custom-black text-white'
                   : ''
-              } !text-xs text-customBlack py-[5.84px] px-[11.8px]`}
+              } !text-xs text-custom-black py-[5.84px] px-[11.8px]`}
               buttonText='Rock'
             />
             <CustomButton
@@ -82,7 +82,7 @@ const Hero = () => {
           </div>
         </div>
         <div className='flex justify-between relative pl-12 pr-[43px] pt-[38px] pb-[43px] max-sm:flex-wrap max-sm:pt-4 max-sm:px-5 max-sm:pb-20 rounded-[22px] bg-custom-black mt-[35px] max-sm:mt-5'>
-          <h1 className='font-montserrat text-5xl leading-[58.51px] uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl'>
+          <h1 className='font-montserrat text-off-white text-5xl leading-[58.51px] uppercase font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl'>
             hit me hard and{' '}
             {activeParams.get('value') === 'music'
               ? 'music'

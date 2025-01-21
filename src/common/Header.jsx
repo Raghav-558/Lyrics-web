@@ -18,7 +18,7 @@ const Header = () => {
           <input
             type='text'
             placeholder='What do you feel like listening to right now ?'
-            className='w-[95%] px-[30px] pt-[13px] pb-[14px] outline-none placeholder-dark-gray'
+            className='w-[95%] px-[30px] pt-[13px] pb-[14px] outline-none placeholder-dark-gray text-custom-black'
           />
           <CustomButton
             icon={
