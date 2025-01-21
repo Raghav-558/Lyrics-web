@@ -4,6 +4,10 @@ import CustomButton from './CustomButton'
 import { SearchIcon } from '../utils/icons'
 
 const Header = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <div className='max-w-[1160px] px-4 mx-auto'>
       <div className='w-full flex items-center justify-between rounded-[20px] pl-[38px] pr-3 py-[10px] gap-4 max-md:px-3 shadow-[0px_10px_10px_0px] shadow-light-gray'>
@@ -14,7 +18,7 @@ const Header = () => {
             className='h-[26.42px] max-sm:h-[22px] pointer-events-none'
           />
         </a>
-        <form className='max-w-[650px] rounded-full flex items-center max-md:hidden max-xl:!max-w-[580px] max-lg:!max-w-[400px] border border-gray w-full pr-[7px] overflow-hidden'>
+        <form onSubmit={handleSubmit} className='max-w-[650px] rounded-full flex items-center max-md:hidden max-xl:!max-w-[580px] max-lg:!max-w-[400px] border border-gray w-full pr-[7px] overflow-hidden'>
           <input
             type='text'
             placeholder='What do you feel like listening to right now ?'

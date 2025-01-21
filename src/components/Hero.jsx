@@ -30,14 +30,14 @@ const Hero = () => {
                 activeParams.get('value') === 'soft'
                   ? 'bg-custom-black text-white'
                   : ''
-              } !text-xs px-[13.48px] py-[5.84px]`}
+              } !text-xs px-[13.48px] py-[5.84px] hover:bg-custom-black hover:text-white transition-all duration-300`}
               buttonText='All'
             />
             <CustomButton
               customOnClick={() => handleDomainChange('pop')}
               myClass={`${
                 activeParams.get('value') === 'pop' ? 'bg-custom-black text-white' : ''
-              } !text-xs text-custom-black py-[5.84px] px-[11.37px]`}
+              } !text-xs text-custom-black py-[5.84px] px-[11.37px] hover:bg-custom-black hover:text-white transition-all duration-300`}
               buttonText='Pop'
             />
             <CustomButton
@@ -46,7 +46,7 @@ const Hero = () => {
                 activeParams.get('value') === 'rock'
                   ? 'bg-custom-black text-white'
                   : ''
-              } !text-xs text-custom-black py-[5.84px] px-[11.8px]`}
+              } !text-xs text-custom-black py-[5.84px] px-[11.8px] hover:bg-custom-black hover:text-white transition-all duration-300`}
               buttonText='Rock'
             />
             <CustomButton
@@ -55,7 +55,7 @@ const Hero = () => {
                 activeParams.get('value') === 'music'
                   ? 'bg-custom-black text-white'
                   : ''
-              } !text-xs text-custom-black py-[5.84px] px-[9.2px] flex items-center gap-[5px]`}
+              } !text-xs text-custom-black py-[5.84px] px-[9.2px] flex items-center gap-[5px] hover:bg-custom-black hover:text-white transition-all duration-300 group`}
               buttonText='More'
               icon={
                 <DownArrow
