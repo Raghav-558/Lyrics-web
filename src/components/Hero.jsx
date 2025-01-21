@@ -73,7 +73,7 @@ const Hero = () => {
                   key={i}
                   href='#link'
                   onClick={() => handleChange(item)}
-                  className='flex items-center hover:!bg-custom-black size-[29px] justify-center rounded-full transition-all duration-300 hover:text-white hover:font-medium text-black text-xs leading-[18px]'
+                  className='flex items-center justify-center transition-all duration-300 hover:!bg-custom-black size-[29px] rounded-full hover:text-white hover:font-medium text-black text-xs leading-[18px]'
                 >
                   {item}
                 </a>
