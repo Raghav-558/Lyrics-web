@@ -17,9 +17,12 @@ const Hero = () => {
     setText(`HIT ME HARD AND ${newDomain.toUpperCase()}`)
   }
 
-  const handleChange = newText => setAlphabet(`${newText}`)
+  const handleChange = newText => {
+    setAlphabet(`${newText}`)
+  }
+
   return (
-    <div className='pt-[10px] pb-10'>
+    <div className='pt-[10px] pb-[60px]'>
       <Header />
       <div className='max-w-[1160px] mx-auto px-4'>
         <div className='flex items-center gap-[15px] py-2 pt-[17px] max-xl:overflow-x-auto '>
@@ -49,12 +52,12 @@ const Hero = () => {
             />
           </div>
           <div className='flex items-center gap-[2px]'>
-            {ITEMS_LIST.map(function (item, index) {
+            {ITEMS_LIST.map(function (item, i) {
               return (
                 <a
-                  onClick={() => handleChange(item)}
-                  key={index}
+                  key={i}
                   href='#link'
+                  onClick={() => handleChange(item)}
                   className='flex items-center hover:!bg-custom-black size-[29px] justify-center rounded-full transition-all duration-300 hover:text-white hover:font-medium text-black text-xs leading-[18px]'
                 >
                   {item}
@@ -70,13 +73,13 @@ const Hero = () => {
           <img
             src={HeroImage}
             alt='hero'
-            className='size-[261px] max-lg:size-48 max-sm:mx-auto max-sm:mt-4 !rounded-[10px] pointer-events-none'
+            className='size-[261px] pointer-events-none  max-lg:size-48 max-sm:mx-auto max-sm:mt-4 !rounded-[10px]'
           />
-          <div className='absolute flex items-center gap-[26px] -bottom-16 max-lg:-bottom-10 max-sm:-bottom-7'>
+          <div className='absolute flex items-center gap-[26px] max-sm:gap-5 -bottom-16 max-lg:-bottom-10 max-sm:-bottom-7 max-sm:left-[40px]'>
             <img
               src={Profile}
               alt='profile'
-              className='size-[206px] max-lg:size-32 max-sm:size-24 pointer-events-none'
+              className='size-[206px] pointer-events-none max-lg:size-32 max-sm:size-24'
             />
             <div>
               <p className='font-semibold text-[32px] max-lg:text-2xl leading-[42px] text-white max-sm:text-xl'>
