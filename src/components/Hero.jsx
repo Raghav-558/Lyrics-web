@@ -1,24 +1,21 @@
 import React, { useState } from 'react'
 import Header from '../common/Header'
-import CustomButton from '../common/CustomButton'
 import { DownArrow } from '../utils/icons'
-import { useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { ITEMS_LIST } from '../utils/helper'
 import HeroImage from '../assets/images/hero.webp'
 import Profile from '../assets/images/profile-image.webp'
+import CustomButton from '../common/CustomButton'
 
 const Hero = () => {
-  const [text, setText] = useState('HIT ME HARD AND SOFT')
-  const [alphabet, setAlphabet] = useState()
-  const navigate = useNavigate()
+  const [activeParams, setActiveParams] = useSearchParams('value')
+  const [text, setText] = useState('')
 
-  const handleDomainChange = newDomain => {
-    navigate(`?value=${newDomain}`)
-    setText(`HIT ME HARD AND ${newDomain.toUpperCase()}`)
+  const handleChange = item => {
+    setText(item)
   }
-
-  const handleChange = newText => {
-    setAlphabet(`${newText}`)
+  const handleDomainChange = value => {
+    setActiveParams({ value })
   }
 
   return (
@@ -28,26 +25,44 @@ const Hero = () => {
         <div className='flex items-center gap-[15px] py-2 pt-[17px] max-xl:overflow-x-auto '>
           <div className='flex items-center gap-[5px]'>
             <CustomButton
-              customOnClick={() => handleDomainChange('all')}
-              myClass='!text-xs px-[13.48px] py-[5.84px] text-custom-black hover:!bg-custom-black hover:text-white'
+              customOnClick={() => handleDomainChange('soft')}
+              myClass={`${
+                activeParams.get('value') === 'soft'
+                  ? 'bg-black text-white'
+                  : ''
+              } !text-xs px-[13.48px] py-[5.84px]`}
               buttonText='All'
             />
             <CustomButton
               customOnClick={() => handleDomainChange('pop')}
-              myClass='!text-xs text-custom-black py-[5.84px] px-[11.37px] hover:!bg-custom-black hover:text-white'
+              myClass={`${
+                activeParams.get('value') === 'pop' ? 'bg-black text-white' : ''
+              } !text-xs text-customBlack py-[5.84px] px-[11.37px]`}
               buttonText='Pop'
             />
             <CustomButton
               customOnClick={() => handleDomainChange('rock')}
-              myClass='!text-xs text-custom-black py-[5.84px] px-[11.8px] hover:!bg-custom-black hover:text-white'
+              myClass={`${
+                activeParams.get('value') === 'rock'
+                  ? 'bg-black text-white'
+                  : ''
+              } !text-xs text-customBlack py-[5.84px] px-[11.8px]`}
               buttonText='Rock'
             />
             <CustomButton
               customOnClick={() => handleDomainChange('music')}
-              myClass='!text-xs text-custom-black py-[5.84px] px-[9.2px] hover:!bg-custom-black hover:text-white group flex items-center gap-[5px]'
+              myClass={`${
+                activeParams.get('value') === 'music'
+                  ? 'bg-custom-black text-white'
+                  : ''
+              } !text-xs text-custom-black py-[5.84px] px-[9.2px] flex items-center gap-[5px]`}
               buttonText='More'
               icon={
-                <DownArrow myClass='group-hover:stroke-white transition-all duration-300' />
+                <DownArrow
+                  myClass={`${
+                    activeParams.get('value') === 'music' ? 'stroke-white' : ''
+                  } group-hover:stroke-white transition-all duration-300`}
+                />
               }
             />
           </div>
@@ -67,8 +82,15 @@ const Hero = () => {
           </div>
         </div>
         <div className='flex justify-between relative pl-12 pr-[43px] pt-[38px] pb-[43px] max-sm:flex-wrap max-sm:pt-4 max-sm:px-5 max-sm:pb-20 rounded-[22px] bg-custom-black mt-[35px] max-sm:mt-5'>
-          <h1 className='font-montserrat font-bold text-5xl leading-[58.51px] text-white max-lg:text-4xl max-sm:text-center max-sm:text-3xl'>
-            {text}
+          <h1 className='font-montserrat text-5xl leading-[58.51px] uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl'>
+            hit me hard and{' '}
+            {activeParams.get('value') === 'music'
+              ? 'music'
+              : activeParams.get('value') === 'pop'
+              ? 'pop'
+              : activeParams.get('value') === 'rock'
+              ? 'rock'
+              : 'soft'}
           </h1>
           <img
             src={HeroImage}
@@ -83,7 +105,7 @@ const Hero = () => {
             />
             <div>
               <p className='font-semibold text-[32px] max-lg:text-2xl leading-[42px] text-white max-sm:text-xl'>
-                Billie Eilish {alphabet}
+                Billie Eilish {text}
               </p>
               <p className='font-montserrat font-medium leading-5 pt-[5px] max-lg:pt-0 pb-[21px] max-sm:text-sm font text-custom-gray'>
                 Relesed May 17, 2024
