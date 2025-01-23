@@ -8,39 +8,28 @@ import { ITEMS_LIST } from '../utils/helper'
 import { DownArrow } from '../utils/icons'
 
 const Hero = () => {
-  const [selectId, setSelectId] = useState()
   const navigate = useNavigate()
   const { id = 'all' } = useParams()
+  const [, setActive] = useState(id)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
 
-  const handleChange = id => {
-    setSelectId(id)
+  const handleTextChange = id => {
     navigate(`/${id}`)
+    setActive(id)
+    setIsDropdownOpen(false)
   }
 
-  useEffect(() => {
-    setSelectId(id)
-  }, [id])
-
-  const handleSelectChange = event => {
-    const selectedValue = event.target.value
-    handleChange(selectedValue)
+  const [, setText] = useState()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const value = searchParams.get('value')?.toUpperCase()
+  const handleChange = (value, item) => {
+    setSearchParams({ value: value.toLowerCase() })
+    setText(`${item}`)
   }
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen)
-  }
-
-  const [activeParams, setActiveParams] = useSearchParams()
-  const value = activeParams.get('value')?.toUpperCase() || 'ALL'
-
-  useEffect(() => {
-    setActiveParams({ value: value.toLowerCase() })
-  }, [value, setActiveParams])
-
-  const handleDomainChange = value => {
-    setActiveParams({ value: value.toLowerCase() })
+    setIsDropdownOpen(prev => !prev)
   }
 
   useEffect(() => {
@@ -49,11 +38,12 @@ const Hero = () => {
         setIsDropdownOpen(false)
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [dropdownRef])
+  }, [])
 
   return (
     <div className='pt-[11px] mb-[60px]'>
@@ -62,37 +52,37 @@ const Hero = () => {
         <div className='flex items-center gap-[15px] pt-[17px] pb-2 max-xl:flex-col'>
           <div className='flex items-center gap-[5px]'>
             <CustomButton
-              customOnClick={() => handleChange('all')}
+              customOnClick={() => handleTextChange('all')}
               myClass={`${
-                selectId === 'all' ? '!bg-custom-black text-white' : ''
-              } !text-xs px-[13.48px] py-[5.84px] hover:!bg-custom-black hover:text-white`}
+                id === 'all' ? '!bg-custom-black !text-white' : ''
+              } !text-xs !text-custom-black !px-[13.48px] !py-[5.84px] hover:!bg-custom-black hover:!text-white`}
               buttonText='All'
             />
             <CustomButton
-              customOnClick={() => handleChange('pop')}
+              customOnClick={() => handleTextChange('pop')}
               myClass={`${
-                selectId === 'pop' ? '!bg-custom-black text-white' : ''
-              } !text-xs text-custom-black py-[5.84px] px-[11.37px] hover:!bg-custom-black hover:text-white`}
+                id === 'pop' ? 'bg-custom-black !text-white' : ''
+              } !text-xs !text-custom-black !py-[5.84px] !px-[11.37px] hover:!bg-custom-black hover:!text-white`}
               buttonText='Pop'
             />
             <CustomButton
-              customOnClick={() => handleChange('rock')}
+              customOnClick={() => handleTextChange('rock')}
               myClass={`${
-                selectId === 'rock' ? '!bg-custom-black text-white' : ''
-              } !text-xs text-custom-black py-[5.84px] px-[11.37px] hover:!bg-custom-black hover:text-white`}
+                id === 'rock' ? 'bg-custom-black !text-white' : ''
+              } !text-xs !text-custom-black !py-[5.84px] !px-[11.8px] hover:!bg-custom-black hover:!text-white`}
               buttonText='Rock'
             />
             <div className='relative' ref={dropdownRef}>
               <CustomButton
                 customOnClick={toggleDropdown}
                 myClass={`${
-                  id === 'music' ? 'bg-custom-black text-white' : ''
-                } !text-xs !text-custom-black !py-[5.84px] !px-[9.2px] hover:!bg-custom-black hover:!text-white !group flex items-center gap-[5px]`}
+                  id === 'more' ? 'bg-custom-black !text-white' : ''
+                } !text-xs !text-custom-black !py-[5.84px] !px-[9.2px] hover:!bg-custom-black hover:!text-white group flex items-center gap-[5px]`}
                 buttonText='More'
                 icon={
                   <DownArrow
-                    className={`${
-                      id === 'music' ? 'stroke-white' : ''
+                    myClass={`${
+                      id === 'more' ? 'stroke-white' : ''
                     } group-hover:stroke-white transition-all duration-300`}
                   />
                 }
@@ -100,20 +90,20 @@ const Hero = () => {
               {isDropdownOpen && (
                 <div className='absolute left-0 mt-2 bg-white shadow-lg rounded-md z-10'>
                   <button
-                    onClick={() => handleChange('all')}
-                    className='py-1 px-2 hover:bg-custom-black hover:text-white text-custom-black w-full rounded-md'
+                    onClick={() => handleTextChange('all')}
+                    className='!text-custom-black py-1 px-4 hover:bg-custom-black transition-all duration-300 text-sm hover:!text-white w-full rounded-[4px]'
                   >
                     All
                   </button>
                   <button
-                    onClick={() => handleChange('pop')}
-                    className='py-1 px-2 hover:bg-custom-black hover:text-white text-custom-black w-full rounded-md'
+                    onClick={() => handleTextChange('pop')}
+                    className='!text-custom-black py-1 px-4 hover:bg-custom-black transition-all duration-300 text-sm hover:!text-white w-full rounded-[4px]'
                   >
-                    pop
+                    Pop
                   </button>
                   <button
-                    onClick={() => handleChange('rock')}
-                    className='py-1 px-2 hover:bg-custom-black hover:text-white text-custom-black w-full rounded-md'
+                    onClick={() => handleTextChange('rock')}
+                    className='!text-custom-black py-1 px-4 hover:bg-custom-black transition-all duration-300 text-sm hover:!text-white w-full rounded-[4px]'
                   >
                     Rock
                   </button>
@@ -124,29 +114,29 @@ const Hero = () => {
           <div className='flex items-center gap-[2px] lg:justify-center xl:justify-start max-lg:overflow-x-auto whitespace-nowrap w-full'>
             {ITEMS_LIST.map((item, index) => (
               <p
-                onClick={() => handleDomainChange(item)}
+                onClick={() => handleChange(item)}
                 key={index}
-                className={`${
-                  activeParams.get('value') === item.toLowerCase()
-                    ? 'bg-custom-black text-white'
+                className={`flex-shrink-0 flex items-center hover:bg-custom-black size-[29px] justify-center rounded-full transition-all duration-300 hover:!text-white hover:font-medium !text-custom-black text-xs leading-[18px] cursor-pointer ${
+                  value === item.toUpperCase()
+                    ? 'bg-custom-black !text-white'
                     : ''
-                } flex items-center text-custom-black cursor-pointer hover:bg-custom-black size-[29px] justify-center rounded-full transition-all duration-300 hover:text-white hover:font-medium text-xs leading-[18px]`}
+                }`}
               >
                 {item}
               </p>
             ))}
           </div>
         </div>
-        <div className='relative flex justify-between pt-[38px] pl-12 pr-[43px] max-sm:mt-6 mt-[35px] pb-[43px] max-sm:flex-wrap max-sm:pt-4 max-sm:px-5 max-sm:pb-20 bg-custom-black rounded-[22px]'>
-          <h1 className='font-Montserrat leading-[58px] text-5xl uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl max-sm:mx-auto'>
-            HIT ME HARD AND{' '}
-            {selectId === 'pop'
-              ? 'POP'
-              : selectId === 'rock'
-              ? 'ROCK'
-              : selectId === 'All'
-              ? 'ALL'
-              : 'All'}
+        <div className='flex pl-12 pr-[43px] justify-between pt-[38px] max-sm:mt-6 mt-[35px] relative pb-[43px] max-sm:flex-wrap max-sm:pt-4 max-sm:px-5 max-sm:pb-20 bg-custom-black rounded-[22px]'>
+          <h1 className='font-Montserrat leading-custom-3xl text-5xl uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl max-sm:mx-auto'>
+            hit me hard and{' '}
+            {id === 'music'
+              ? 'music'
+              : id === 'pop'
+              ? 'pop'
+              : id === 'rock'
+              ? 'rock'
+              : 'all'}
           </h1>
           <img
             src={HeroImage}
@@ -156,14 +146,14 @@ const Hero = () => {
           <div className='absolute flex items-center gap-[26px] -bottom-16 max-lg:-bottom-10 max-sm:-bottom-7'>
             <img
               src={ProfileImage}
-              alt='profile-image'
+              alt='profile'
               className='size-[206px] max-lg:size-32 max-sm:size-20 pointer-events-none'
             />
             <div>
-              <p className='font-semibold leading-[42px] text-[32px] max-lg:text-2xl text-white max-sm:text-lg'>
+              <p className='font-semibold text-[32px] max-lg:text-2xl leading-[42px] text-white max-sm:text-lg'>
                 Billie Eilish <span className='uppercase'>{value}</span>
               </p>
-              <p className='font-Montserrat text-custom-gray font-medium leading-[19px] pt-[5px] max-lg:pt-0 max-sm:pb-8 pb-[21px] max-sm:text-sm'>
+              <p className='font-Montserrat text-custom-gray font-medium leading-5 pt-[5px] max-lg:pt-0 max-sm:pb-8 pb-[21px] max-sm:text-sm'>
                 Released May 17, 2024
               </p>
             </div>
