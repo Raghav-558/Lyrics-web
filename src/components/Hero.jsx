@@ -46,7 +46,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <div className='pt-[11px] mb-[60px]'>
+    <div className='pt-[11px] pb-[60px]'>
       <Header />
       <div className='max-w-[1160px] px-4 mx-auto'>
         <div className='flex items-center gap-[15px] pt-[17px] pb-2 max-xl:flex-col'>
@@ -128,7 +128,7 @@ const Hero = () => {
           </div>
         </div>
         <div className='flex pl-12 pr-[43px] justify-between pt-[38px] max-sm:mt-6 mt-[35px] relative pb-[43px] max-sm:flex-wrap max-sm:pt-4 max-sm:px-5 max-sm:pb-20 bg-custom-black rounded-[22px]'>
-          <h1 className='font-Montserrat leading-custom-3xl text-5xl uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl max-sm:mx-auto'>
+          <h1 className='font-Montserrat leading-[58px] text-5xl uppercase text-white font-bold max-lg:text-4xl max-sm:text-center max-sm:text-3xl max-sm:mx-auto'>
             hit me hard and{' '}
             {id === 'music'
               ? 'music'
@@ -143,7 +143,7 @@ const Hero = () => {
             alt='hero'
             className='size-[261px] rounded-[10px] pointer-events-none max-lg:size-48 max-sm:mx-auto max-sm:mt-4'
           />
-          <div className='absolute flex items-center gap-[26px] -bottom-16 max-lg:-bottom-10 max-sm:-bottom-7'>
+          <div className='absolute flex items-center gap-[26px] max-sm:gap-4 -bottom-16 max-lg:-bottom-10 max-sm:-bottom-7 max-sm:left-[40px]'>
             <img
               src={ProfileImage}
               alt='profile'
